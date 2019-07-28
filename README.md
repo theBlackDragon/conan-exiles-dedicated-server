@@ -35,8 +35,10 @@ $ docker create
 # Exposed variables
 To map the internally used group and user to ones existing on the host 
 machine:
+
  - PUID : the user ID for use by the server process
  - PGID : the group ID for use by the server process
+ 
 Not setting these is likely to lead to all kinds of permission errors.
 
 # Known issues
