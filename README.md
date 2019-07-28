@@ -24,8 +24,8 @@ $ docker create
 # Exposed ports
  |Port   |Protocol | Function |
  |-------|---------|----------|
- |  7777 | UDP | game port |
- |  7778 | UDP | |
+ |  7777 | UDP | game port (direct connections) |
+ |  7778 | UDP | game port (connections through Steam |
  | 27015 | UDP | steam server browser port |
 
 # Exposed variables
