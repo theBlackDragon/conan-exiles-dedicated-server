@@ -2,6 +2,10 @@
 This is a Dockerfile allowing you to run the Conan Exiles Dedicated 
 Server inside of a Docker container, through Wine.
 
+# Requirements
+Requires the [steamcmd](https://github.com/theBlackDragon/steamcmd) 
+base image to be present (clone and run the Makefile)
+
 # How to use this image
 
 The image includes a Makefile that can be used to build it by just
