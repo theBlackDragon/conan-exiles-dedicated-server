@@ -14,14 +14,14 @@ typing `Make`
 To create a container from the image, assuming the default image name
 set by the Makefile:
 ```console
-$ docker create 
-    --name conan 
-    -p7777:7777/udp 
-    -p7778:7778/udp 
-    -p27015:27015/udp 
-    -e PUID=1000 
-    -e PGID=1000 
-    -v /mnt/docker/conan:/home/steam/conan-dedicated 
+$ docker create \
+    --name conan \
+    -p7777:7777/udp \ 
+    -p7778:7778/udp \
+    -p27015:27015/udp \ 
+    -e PUID=1000 \
+    -e PGID=1000 \
+    -v /mnt/docker/conan:/home/steam/conan-dedicated \
     bgeens/conan-exiles-server:0.1
 ```
 
