@@ -41,6 +41,25 @@ machine:
  
 Not setting these is likely to lead to all kinds of permission errors.
 
+# Mods
+The container will create a modlist.txt file in the root of the 
+Docker volume on first startup if it does not already exist.
+
+The contents of the file looks something like this:
+```
+880177231       # Pythagoras
+1472647650      # Limestone Buildings
+1369802940      # Emberlight
+1159180273      # Fashionist
+1491981725      # LBPR
+```
+Make sure the second column (with the comments) is separated from the
+first with a tab (processing is done with awk, so anything awk 
+considers a valid column separator should work).
+The second column is only there for human readability, listing only 
+the mods numbers works just fine as well (but might be a tad harder 
+to maintain)
+
 # Known issues
  - The created container does not show up in the Steam or ingame 
    server browsers for me. Direct connections through IP do work 
