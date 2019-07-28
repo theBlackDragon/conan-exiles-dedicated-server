@@ -29,8 +29,8 @@ $ docker create \
  |Port   |Protocol | Function |
  |-------|---------|----------|
  |  7777 | UDP | game port (direct connections) |
- |  7778 | UDP | game port (connections through Steam |
- | 27015 | UDP | steam server browser port |
+ |  7778 | UDP | game port (connections through Steam) |
+ | 27015 | UDP | Steam server browser port |
 
 # Exposed variables
 To map the internally used group and user to ones existing on the host 
