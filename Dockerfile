@@ -37,15 +37,10 @@ RUN set -x \
     # dpkg --add-architecture i386 \
     && apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
-               # screen \
-               wine \
-               wine32 \
-               wine64 \
                libwine \
                libwine:i386 \
                fonts-wine \
-               wine-stable \
-               # winehq-stable \
+               winehq-stable \
                xauth \
                xvfb
                
