@@ -37,6 +37,7 @@ RUN set -x \
     # dpkg --add-architecture i386 \
     && apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
+               winbind \
                libwine \
                libwine:i386 \
                fonts-wine \
