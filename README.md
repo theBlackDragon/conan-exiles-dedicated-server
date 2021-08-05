@@ -20,6 +20,25 @@ $ docker create \
     -v /mnt/docker/conan:/home/steam/conan-dedicated \
     bgeens/conan-exiles-server:0.1
 ```
+or using Docker Compose:
+```
+version: "3.2"
+
+services:
+  conan:
+    image: bgeens/conan-exiles-server:0.1
+    container_name: conan
+    restart: "unless-stopped"
+    volumes:
+      - /mnt/docker/conan:/home/steam/conan-dedicated
+    environment:
+      - PUID=1000
+      - PGID=1000
+    ports:
+      - 7777:7777/udp
+      - 7778:7778/udp
+      - 27015:27015/udp
+```
 
 # Exposed ports
  |Port   |Protocol | Function |
