@@ -53,6 +53,8 @@ machine:
 
  - PUID : the user ID for use by the server process
  - PGID : the group ID for use by the server process
+ - CONAN_ARGS : arguments passed to the Conan server process, defaults
+   to `-log -nosteam`.
  
 Not setting these is likely to lead to all kinds of permission errors.
 

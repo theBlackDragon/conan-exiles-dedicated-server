@@ -90,6 +90,9 @@ WORKDIR $STEAMAPPDIR
 
 VOLUME $STEAMAPPDIR
 
+# Parameters for the Conan process
+ENV CONAN_ARGS -log -nosteam
+
 # Set Entrypoint
 # 1. Update server
 # 2. Start the server
