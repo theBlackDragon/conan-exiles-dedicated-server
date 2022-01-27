@@ -81,8 +81,8 @@ RUN set -x \
     && su steam -c \
           "${STEAMCMDDIR}/steamcmd.sh \
           +@sSteamCmdForcePlatformType windows \
-          +login anonymous \
           +force_install_dir ${STEAMAPPDIR} \
+          +login anonymous \
           +app_update ${STEAMAPPID} validate \
           +quit"
 
