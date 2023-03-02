@@ -49,7 +49,7 @@ RUN set -x \
                locales \
                software-properties-common \
     && curl https://dl.winehq.org/wine-builds/winehq.key | apt-key add \
-    && apt-add-repository 'deb http://dl.winehq.org/wine-builds/debian/ bullseye main' \
+    && apt-add-repository 'deb http://dl.winehq.org/wine-builds/debian/ bullseye main contrib non-free' \
     && apt-get remove --purge -y \
                curl
 
