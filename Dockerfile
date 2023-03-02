@@ -70,6 +70,7 @@ RUN set -x \
                fonts-wine \
                winehq-stable \
                xauth \
+			   winetricks \
                xvfb \
     # Clean TMP, apt-get cache and other stuff to make the image smaller
     && apt-get clean autoclean \
