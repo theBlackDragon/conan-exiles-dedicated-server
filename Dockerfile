@@ -70,13 +70,11 @@ RUN set -x \
                fonts-wine \
                winehq-stable \
                xauth \
-			   winetricks \
-               xvfb \
+			   xvfb \
     # Clean TMP, apt-get cache and other stuff to make the image smaller
     && apt-get clean autoclean \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
-	&& winetricks msxml6
                
 # Run Steamcmd and install the No One Survived Dedicated Server              
 RUN set -x \
@@ -94,6 +92,21 @@ VOLUME $STEAMAPPDIR
 
 # Parameters for the Conan process
 ENV NOS_ARGS -log -nosteam -server
+RUN	    wget -q -O /usr/sbin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
+        && chmod +x /usr/sbin/winetricks
+
+ENV     HOME=/home
+ENV     WINEPREFIX=/home/.wine
+ENV     WINEDLLOVERRIDES="mscoree,mshtml="
+ENV     DISPLAY=:0
+ENV     DISPLAY_WIDTH=1024
+ENV     DISPLAY_HEIGHT=768
+ENV     DISPLAY_DEPTH=16
+ENV     AUTO_UPDATE=1
+ENV     XVFB=1
+
+USER    steam
+WORKDIR	/home
 
 # Set Entrypoint
 # 1. Update server
