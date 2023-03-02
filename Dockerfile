@@ -30,7 +30,7 @@ RUN set -x \
     && su steam -c \
 	  "mkdir -p ${STEAMCMDDIR} \
 		 && cd ${STEAMCMDDIR} \
-So		 && wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar zxf -" \
+So		 && wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar zxf -"
     
 
 ###################
@@ -48,7 +48,7 @@ RUN set -x \
                locales \
                software-properties-common \
     && curl https://dl.winehq.org/wine-builds/winehq.key | apt-key add \
-    && apt-add-repository 'deb http://dl.winehq.org/wine-builds/debian/ bullseye main' \
+    && apt-add-repository 'deb http://dl.winehq.org/wine-builds/debian/ bullseye main'
 
 # Install locale
 RUN sed --in-place '/en_US.UTF-8/s/^#//' -i /etc/locale.gen \
