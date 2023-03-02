@@ -39,7 +39,7 @@ So		 && wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_lin
 ###################
 ENV STEAMAPPID 2329680
 ENV STEAMAPPDIR /home/steam/nos-dedicated
-
+RUN sed -i -e "s/ main[[:space:]]*\$/ main contrib non-free/" /etc/apt/sources.list
 # Install dependencies
 RUN set -x \
     # Add WineHQ repository
@@ -49,7 +49,7 @@ RUN set -x \
                locales \
                software-properties-common \
     && curl https://dl.winehq.org/wine-builds/winehq.key | apt-key add \
-    && apt-add-repository 'deb http://dl.winehq.org/wine-builds/debian/ bullseye main contrib non-free' \
+    && apt-add-repository 'deb http://dl.winehq.org/wine-builds/debian/ bullseye main' \
     && apt-get remove --purge -y \
                curl
 
