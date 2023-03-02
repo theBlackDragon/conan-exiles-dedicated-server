@@ -49,8 +49,6 @@ RUN set -x \
                software-properties-common \
     && curl https://dl.winehq.org/wine-builds/winehq.key | apt-key add \
     && apt-add-repository 'deb http://dl.winehq.org/wine-builds/debian/ bullseye main' \
-    && apt-get remove --purge -y \
-               curl
 
 # Install locale
 RUN sed --in-place '/en_US.UTF-8/s/^#//' -i /etc/locale.gen \
@@ -90,12 +88,11 @@ WORKDIR $STEAMAPPDIR
 VOLUME $STEAMAPPDIR
 
 # Parameters for the Conan process
-ENV NOS_ARGS -log -nosteam -server
 RUN	    wget -q -O /usr/sbin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
         && chmod +x /usr/sbin/winetricks
-
-ENV     HOME=/home
-ENV     WINEPREFIX=/home/.wine
+ENV 	NOS_ARGS -log -nosteam -server
+ENV     HOME=${STEAMAPPDIR}
+ENV     WINEPREFIX=${STEAMAPPDIR}/.wine
 ENV     WINEDLLOVERRIDES="mscoree,mshtml="
 ENV     DISPLAY=:0
 ENV     DISPLAY_WIDTH=1024
@@ -103,9 +100,6 @@ ENV     DISPLAY_HEIGHT=768
 ENV     DISPLAY_DEPTH=16
 ENV     AUTO_UPDATE=1
 ENV     XVFB=1
-
-USER    steam
-WORKDIR	/home
 
 # Set Entrypoint
 # 1. Update server
