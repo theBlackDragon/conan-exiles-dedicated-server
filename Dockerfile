@@ -31,8 +31,7 @@ RUN set -x \
 	  "mkdir -p ${STEAMCMDDIR} \
 		 && cd ${STEAMCMDDIR} \
 So		 && wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar zxf -" \
-    && apt-get remove --purge -y \
-	       wget
+    
 
 ###################
 # No One Survived #
