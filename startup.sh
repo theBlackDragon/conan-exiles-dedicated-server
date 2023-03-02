@@ -37,4 +37,4 @@ Starting server
 -------------------------------------
 "
 # su steam -c  "xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine ${STEAMAPPDIR}/WRSHServer.exe -log -nosteam -server"
-su steam -c  "xvfb-run --auto-servernum wine ${STEAMAPPDIR}/WRSHServer.exe ${CONAN_ARGS}"
+su steam -c  "xvfb-run --auto-servernum wine ${STEAMAPPDIR}/WRSHServer.exe ${NOS_ARGS}"
