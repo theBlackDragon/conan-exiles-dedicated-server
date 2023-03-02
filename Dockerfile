@@ -76,6 +76,7 @@ RUN set -x \
     && apt-get clean autoclean \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
+	&& winetricks msxml6
                
 # Run Steamcmd and install the No One Survived Dedicated Server              
 RUN set -x \
