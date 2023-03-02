@@ -34,11 +34,11 @@ So		 && wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_lin
     && apt-get remove --purge -y \
 	       wget
 
-################
-# Conan Exiles #
-################
-ENV STEAMAPPID 443030
-ENV STEAMAPPDIR /home/steam/conan-dedicated
+###################
+# No One Survived #
+###################
+ENV STEAMAPPID 2329680
+ENV STEAMAPPDIR /home/steam/nos-dedicated
 
 # Install dependencies
 RUN set -x \
@@ -76,7 +76,7 @@ RUN set -x \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
                
-# Run Steamcmd and install the Conan Exiles Dedicated Server              
+# Run Steamcmd and install the No One Survived Dedicated Server              
 RUN set -x \
     && su steam -c \
           "${STEAMCMDDIR}/steamcmd.sh \
@@ -91,7 +91,7 @@ WORKDIR $STEAMAPPDIR
 VOLUME $STEAMAPPDIR
 
 # Parameters for the Conan process
-ENV CONAN_ARGS -log -nosteam
+ENV NOS_ARGS -log -nosteam -server
 
 # Set Entrypoint
 # 1. Update server
@@ -99,4 +99,4 @@ ENV CONAN_ARGS -log -nosteam
 COPY ./startup.sh /root/startup.sh
 ENTRYPOINT ["/root/startup.sh"]
 
-EXPOSE 27015/udp 7777/udp 7778/udp
+EXPOSE 27014/udp 7767/udp 
