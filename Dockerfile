@@ -67,7 +67,8 @@ RUN set -x \
                fonts-wine \
                winehq-stable \
                xauth \
-			   xvfb \
+	       xvfb \
+	       cabextract \
     # Clean TMP, apt-get cache and other stuff to make the image smaller
     && apt-get clean autoclean \
     && apt-get autoremove -y \
