@@ -66,4 +66,4 @@ Starting server
 -------------------------------------
 "
 # su steam -c  "xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine ${STEAMAPPDIR}/ConanSandboxServer.exe -log -nosteam"
-su steam -c  "xvfb-run --auto-servernum wine ${STEAMAPPDIR}/ConanSandboxServer.exe ${CONAN_ARGS}"
+su steam -c  "xvfb-run --auto-servernum wine64 ${STEAMAPPDIR}/ConanSandboxServer.exe ${CONAN_ARGS}"

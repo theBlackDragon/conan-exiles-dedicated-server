@@ -63,19 +63,25 @@ ENV LC_ALL en_US.UTF-8
 # Install Wine
 RUN set -x \
     && apt-get update \
-    && apt-get install -y --no-install-recommends --no-install-suggests \
+    && apt-get install -y --install-recommends \
                winbind \
-               libwine \
-               libwine:i386 \
-               fonts-wine \
+               # libwine \
+               # libwine:i386 \
+               # fonts-wine \
                winehq-stable \
-               xauth \
+               # xauth \
                xvfb \
+               # winehq-devel \
     # Clean TMP, apt-get cache and other stuff to make the image smaller
     && apt-get clean autoclean \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
-               
+
+# Install Mono
+RUN wget -P  http://dl.winehq.org/wine/wine-mono/7.0.0/wine-mono-7.0.0.msi
+RUN msiexec /i wine-mono-7.0.0.msi
+RUN rm wine-mono-7.0.0.msi
+
 # Run Steamcmd and install the Conan Exiles Dedicated Server              
 RUN set -x \
     && su steam -c \
