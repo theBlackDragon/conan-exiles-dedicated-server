@@ -30,16 +30,15 @@ RUN set -x \
     && su steam -c \
 	  "mkdir -p ${STEAMCMDDIR} \
 		 && cd ${STEAMCMDDIR} \
-So		 && wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar zxf -" \
-    && apt-get remove --purge -y \
-	       wget
+So		 && wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar zxf -"
+    
 
-################
-# Conan Exiles #
-################
-ENV STEAMAPPID 443030
-ENV STEAMAPPDIR /home/steam/conan-dedicated
-
+###################
+# No One Survived #
+###################
+ENV STEAMAPPID 2329680
+ENV STEAMAPPDIR /home/steam/nos-dedicated
+RUN sed -i -e "s/ main[[:space:]]*\$/ main contrib non-free/" /etc/apt/sources.list
 # Install dependencies
 RUN set -x \
     # Add WineHQ repository
@@ -49,9 +48,7 @@ RUN set -x \
                locales \
                software-properties-common \
     && curl https://dl.winehq.org/wine-builds/winehq.key | apt-key add \
-    && apt-add-repository 'deb http://dl.winehq.org/wine-builds/debian/ bullseye main' \
-    && apt-get remove --purge -y \
-               curl
+    && apt-add-repository 'deb http://dl.winehq.org/wine-builds/debian/ bullseye main'
 
 # Install locale
 RUN sed --in-place '/en_US.UTF-8/s/^#//' -i /etc/locale.gen \
@@ -70,13 +67,14 @@ RUN set -x \
                fonts-wine \
                winehq-stable \
                xauth \
-               xvfb \
+	       xvfb \
+	       cabextract \
     # Clean TMP, apt-get cache and other stuff to make the image smaller
     && apt-get clean autoclean \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
                
-# Run Steamcmd and install the Conan Exiles Dedicated Server              
+# Run Steamcmd and install the No One Survived Dedicated Server              
 RUN set -x \
     && su steam -c \
           "${STEAMCMDDIR}/steamcmd.sh \
@@ -91,7 +89,18 @@ WORKDIR $STEAMAPPDIR
 VOLUME $STEAMAPPDIR
 
 # Parameters for the Conan process
-ENV CONAN_ARGS -log -nosteam
+RUN	    wget -q -O /usr/sbin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
+        && chmod +x /usr/sbin/winetricks
+ENV 	NOS_ARGS -log -nosteam -server
+ENV     HOME=${STEAMAPPDIR}
+ENV     WINEPREFIX=${STEAMAPPDIR}/.wine
+ENV     WINEDLLOVERRIDES="mscoree,mshtml="
+ENV     DISPLAY=:0
+ENV     DISPLAY_WIDTH=1024
+ENV     DISPLAY_HEIGHT=768
+ENV     DISPLAY_DEPTH=16
+ENV     AUTO_UPDATE=1
+ENV     XVFB=1
 
 # Set Entrypoint
 # 1. Update server
@@ -99,4 +108,4 @@ ENV CONAN_ARGS -log -nosteam
 COPY ./startup.sh /root/startup.sh
 ENTRYPOINT ["/root/startup.sh"]
 
-EXPOSE 27015/udp 7777/udp 7778/udp
+EXPOSE 27014/udp 7767/udp 
