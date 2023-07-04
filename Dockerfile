@@ -41,7 +41,7 @@ ENV STEAMAPPDIR /home/steam/conan-dedicated
 # Install dependencies
 RUN set -x \
     # Add WineHQ repository
-    && apt-get install -y --no-install-recommends --no-install-suggests \
+    && apt-get install -y --no-install-recommends --no-install-suggests --install-recommends \
                gnupg \
                locales \
                software-properties-common \
