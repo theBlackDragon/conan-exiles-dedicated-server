@@ -1,7 +1,7 @@
 ###########################################################
 # Dockerfile that builds a Conan Exiles Gameserver
 ###########################################################
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 LABEL maintainer="bert@lair.be"
 
@@ -49,7 +49,7 @@ RUN set -x \
                locales \
                software-properties-common \
     && curl https://dl.winehq.org/wine-builds/winehq.key | apt-key add \
-    && apt-add-repository 'deb http://dl.winehq.org/wine-builds/debian/ bullseye main' \
+    && apt-add-repository 'deb http://dl.winehq.org/wine-builds/debian/ bookworm main' \
     && apt-get remove --purge -y \
                curl
 
