@@ -74,9 +74,10 @@ RUN set -x \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
                
-# Run Steamcmd and install the Conan Exiles Dedicated Server              
+# Run Steamcmd and install the Conan Exiles Dedicated Server
+USER steam
+
 RUN set -x \
-    && su steam -c \
           "${STEAMCMDDIR}/steamcmd.sh \
           +@sSteamCmdForcePlatformType windows \
           +force_install_dir ${STEAMAPPDIR} \
