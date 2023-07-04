@@ -30,9 +30,7 @@ RUN set -x \
     && su steam -c \
 	  "mkdir -p ${STEAMCMDDIR} \
 		 && cd ${STEAMCMDDIR} \
-So		 && wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar zxf -" \
-    && apt-get remove --purge -y \
-	       wget
+		 && wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar zxf -" \
 
 ################
 # Conan Exiles #
@@ -44,14 +42,14 @@ ENV STEAMAPPDIR /home/steam/conan-dedicated
 RUN set -x \
     # Add WineHQ repository
     && apt-get install -y --no-install-recommends --no-install-suggests \
-               curl \
                gnupg \
                locales \
                software-properties-common \
-    && curl https://dl.winehq.org/wine-builds/winehq.key | apt-key add \
-    && apt-add-repository 'deb http://dl.winehq.org/wine-builds/debian/ bookworm main' \
+    && mkdir -pm755 /etc/apt/keyrings \
+    && wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key \
+    && wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources \
     && apt-get remove --purge -y \
-               curl
+               wget
 
 # Install locale
 RUN sed --in-place '/en_US.UTF-8/s/^#//' -i /etc/locale.gen \
