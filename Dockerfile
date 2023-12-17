@@ -78,6 +78,7 @@ RUN set -x \
 USER steam
 
 RUN set -x \
+    &&  su steam -c \
           "${STEAMCMDDIR}/steamcmd.sh \
           +@sSteamCmdForcePlatformType windows \
           +force_install_dir ${STEAMAPPDIR} \
